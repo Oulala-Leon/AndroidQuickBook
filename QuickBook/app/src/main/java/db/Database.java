@@ -14,6 +14,6 @@ public class Database {
         public static final String TABLE = "Book";
 
         public static final String PAGE_CONTENTS = "Contents";
-        public static final int TEXT_TYPE = 0;
+        public static final String TEXT_TYPE = "Zero";
     }
 }

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">QuickBook</string>
     <string name="action_settings">Settings</string>
+    <string name="URL">URL</string>
+    <string name="Text">Text</string>
+    <string name="Next">-></string>
+    <string name="Prev">(-</string>
 </resources>

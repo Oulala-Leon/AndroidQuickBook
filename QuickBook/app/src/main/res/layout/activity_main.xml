@@ -28,6 +28,42 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:id="@+id/Reader">
+
+        <TextView android:id="@+id/PlainTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <WebView android:id="@+id/WebPageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button android:id="@+id/next"
+            android:text="@string/Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="300dp"
+            android:layout_marginEnd="10dp"
+            android:onClick="nextButton"
+            />
+
+        <Button android:id="@+id/prev"
+            android:text="@string/Prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:onClick="prevButton"
+            />
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
