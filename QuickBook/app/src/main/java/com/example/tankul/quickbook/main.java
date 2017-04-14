@@ -58,7 +58,7 @@ public class main extends AppCompatActivity {
     }
 
     public void nextButton(View v) {
-        if (currentPage < textsandURLs.size()) {
+        if (currentPage < textsandURLs.size() - 1) {
             {
                 currentPage++;
                 updateUI();
@@ -67,7 +67,7 @@ public class main extends AppCompatActivity {
     }
 
     public void prevButton(View v) {
-        if (currentPage >= 0) {
+        if (currentPage > 0) {
             {
                 currentPage--;
                 updateUI();
@@ -85,7 +85,6 @@ public class main extends AppCompatActivity {
                 webview.loadUrl(textsandURLs.get(currentPage).substring(6));
             } else {
                 textview.setText(textsandURLs.get(currentPage));
-                //webview.destroy();
             }
         }
     }
