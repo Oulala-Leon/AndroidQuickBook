@@ -29,4 +29,9 @@ public class Database_Helper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS" + Database.Book.TABLE);
         onCreate(db);
     }
+
+    public void Erase(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE " + Database.Book.TABLE);
+        onCreate(db);
+    }
 }

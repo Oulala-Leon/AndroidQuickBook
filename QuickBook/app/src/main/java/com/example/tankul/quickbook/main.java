@@ -1,6 +1,8 @@
 package com.example.tankul.quickbook;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,46 +15,30 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import db.Database_Helper;
+
 
 public class main extends AppCompatActivity {
     int currentPage = 0;
     ArrayList<String> textsandURLs = new ArrayList<>();
+    String ToShow;
+
+    Database_Helper mHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mHelper = new Database_Helper(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final Intent intent = new Intent(this, InputActivity.class);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(main.this);
-                dialog.setContentView(R.layout.writepage);
-                dialog.show();
-                final EditText text = (EditText) dialog.findViewById(R.id.TextInput);
-                final Button URLButton = (Button) dialog.findViewById(R.id.URLButton);
-                final Button textButton = (Button) dialog.findViewById(R.id.TextButton);
-                textButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        textsandURLs.add(text.getText().toString());
-                        currentPage = textsandURLs.size() - 1;
-                        updateUI();
-                        dialog.dismiss();
-                    }
-                });
-
-                URLButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        textsandURLs.add("~URL:~" + (text.getText().toString()));
-                        currentPage = textsandURLs.size() - 1;
-                        updateUI();
-                        dialog.dismiss();
-                    }
-                });
+                startActivity(intent);
+                updateUI();
             }
         });
     }
@@ -83,7 +69,8 @@ public class main extends AppCompatActivity {
             if (textsandURLs.get(currentPage).contains("~URL:~")) {
                 textview.setText(null);
                 webview.loadUrl(textsandURLs.get(currentPage).substring(6));
-            } else {
+            }
+            else {
                 textview.setText(textsandURLs.get(currentPage));
             }
         }

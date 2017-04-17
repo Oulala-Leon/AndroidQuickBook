@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tankul.quickbook.InputActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="40dp"
+            android:hint="Input your text or URL here"
+            android:id="@+id/TextInput"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/URL"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/TextInput"
+            android:id="@+id/URLButton"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text"
+            android:layout_alignTop="@id/URLButton"
+            android:layout_toStartOf="@id/URLButton"
+            android:id="@+id/TextButton"
+            />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
