@@ -24,8 +24,6 @@ public class InputActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_input);
-        //Intent intent = getIntent();
         Context context = this;
         mHelper = new Database_Helper(context);
         final SQLiteDatabase db = mHelper.getWritableDatabase();
