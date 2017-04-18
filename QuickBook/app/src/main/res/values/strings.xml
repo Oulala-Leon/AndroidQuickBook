@@ -5,4 +5,9 @@
     <string name="Text">Text</string>
     <string name="Next">-></string>
     <string name="Prev">(-</string>
+    <string name="tenNext">--></string>
+    <string name="tenPrev">(--</string>
+    <string name="toStart">Start</string>
+    <string name="toEnd">End</string>
+
 </resources>

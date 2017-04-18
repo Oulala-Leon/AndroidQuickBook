@@ -1,5 +1,6 @@
 package com.example.tankul.quickbook;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -50,7 +51,17 @@ public class main extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+
+                cursor.moveToLast();
+                updateUI();
+            }
+        });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
                 cursor.close();
                 db.close();
                 db = mHelper.getReadableDatabase();
@@ -62,7 +73,12 @@ public class main extends AppCompatActivity {
                 cursor.moveToLast();
                 updateUI();
             }
-        });
+            else
+            {
+                cursor.moveToLast();
+                updateUI();
+            }
+        }
     }
 
     public void setFirstPage(Intent intent) {
@@ -80,6 +96,27 @@ public class main extends AppCompatActivity {
     public void prevButton(View v) {
         if (!cursor.isFirst())
             cursor.moveToPrevious();
+        updateUI();
+    }
+
+    public void nextTenButton(View v) {
+        int i = 10;
+        while (!cursor.isLast() && i != 0)
+        {
+            cursor.moveToNext();
+            i--;
+        }
+        updateUI();
+    }
+
+    public void prevTenButton(View v) {
+
+        int i = 10;
+        while (!cursor.isFirst() && i != 0)
+        {
+            cursor.moveToPrevious();
+            i--;
+        }
         updateUI();
     }
 
