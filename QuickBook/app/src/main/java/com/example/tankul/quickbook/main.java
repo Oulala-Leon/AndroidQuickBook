@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,23 +38,39 @@ public class main extends AppCompatActivity {
                         Database.Book.PAGE_CONTENTS,
                         Database.Book.TEXT_TYPE},
                 null, null, null, null, null);
-        cursor.moveToNext();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final Intent intent = new Intent(this, InputActivity.class);
+            if (cursor.getCount()<1) {
+                setFirstPage(intent);
+            }
+            cursor.moveToNext();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(intent);
+                String num = "" + cursor.getCount();
+                Log.d("", num);
                 updateUI();
             }
         });
     }
 
+    public void setFirstPage(Intent intent) {
+        Toast.makeText(this, "Please input your first text or URL.",
+                Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        int num = cursor.getCount();
+        String ah = "" + num;
+        Log.d("",ah);
+    }
+
     public void nextButton(View v) {
-        if (!cursor.isLast())
+        if (cursor.isLast())
             Log.d("Cursor is", "at last");
         else
             cursor.moveToNext();
+        String num = "" + cursor.getCount();
+        Log.d("", num);
         updateUI();
     }
 
@@ -62,6 +79,8 @@ public class main extends AppCompatActivity {
             Log.d("Cursor is", "at first");
         else
             cursor.moveToPrevious();
+        String num = "" + cursor.getCount();
+        Log.d("", num);
         updateUI();
     }
 
