@@ -42,14 +42,23 @@ public class main extends AppCompatActivity {
             if (cursor.getCount()<1) {
                 setFirstPage(intent);
             }
-            cursor.moveToNext();
+        cursor.moveToNext();
+            updateUI();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 startActivity(intent);
-                String num = "" + cursor.getCount();
-                Log.d("", num);
+                cursor.close();
+                db.close();
+                db = mHelper.getReadableDatabase();
+                cursor = db.query(Database.Book.TABLE,
+                        new String[] {Database.Book._ID,
+                                Database.Book.PAGE_CONTENTS,
+                                Database.Book.TEXT_TYPE},
+                        null, null, null, null, null);
+                cursor.moveToLast();
                 updateUI();
             }
         });
@@ -59,29 +68,23 @@ public class main extends AppCompatActivity {
         Toast.makeText(this, "Please input your first text or URL.",
                 Toast.LENGTH_SHORT).show();
         startActivity(intent);
-        int num = cursor.getCount();
-        String ah = "" + num;
-        Log.d("",ah);
     }
 
     public void nextButton(View v) {
-        if (cursor.isLast())
-            Log.d("Cursor is", "at last");
-        else
+        if (!cursor.isLast())
             cursor.moveToNext();
-        String num = "" + cursor.getCount();
-        Log.d("", num);
         updateUI();
     }
 
     public void prevButton(View v) {
-        if (cursor.isFirst())
-            Log.d("Cursor is", "at first");
-        else
+        if (!cursor.isFirst())
             cursor.moveToPrevious();
-        String num = "" + cursor.getCount();
-        Log.d("", num);
         updateUI();
+    }
+
+    public void tapURL()
+    {
+        //WebView webview = (WebView) findViewById(R.id.WebPageView);
     }
 
     private void updateUI() {
@@ -95,6 +98,7 @@ public class main extends AppCompatActivity {
         }
         else
         {
+            webview.stopLoading();
             textview.setText(cursor.getString(1));
         }
     }

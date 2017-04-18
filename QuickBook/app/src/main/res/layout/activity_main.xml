@@ -43,7 +43,8 @@
             android:layout_marginTop="100dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:textSize="15dp"/>
+            android:textSize="20dp"
+            android:onClick="tapURL"/>
 
 
         <WebView android:id="@+id/WebPageView"
