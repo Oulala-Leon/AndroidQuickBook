@@ -3,6 +3,7 @@ package com.example.tankul.quickbook;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -42,8 +43,8 @@ public class main extends AppCompatActivity {
             if (cursor.getCount()<1) {
                 setFirstPage(intent);
             }
-        cursor.moveToNext();
-            updateUI();
+        cursor.moveToFirst();
+        updateUI();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
@@ -82,23 +83,26 @@ public class main extends AppCompatActivity {
         updateUI();
     }
 
-    public void tapURL()
+    public void tapURL(View view)
     {
-        //WebView webview = (WebView) findViewById(R.id.WebPageView);
+        WebView webview = (WebView) findViewById(R.id.WebPageView);
+        if (cursor.getInt(2) == 1)
+        {
+            webview.loadUrl(cursor.getString(1));
+        }
     }
 
     private void updateUI() {
         TextView textview = (TextView) findViewById(R.id.PlainTextView);
-        WebView webview = (WebView) findViewById(R.id.WebPageView);
 
         if (cursor.getInt(2) == 1)
         {
-            webview.loadUrl(cursor.getString(1));
-            textview.setText(null);
+            textview.setText(cursor.getString(1));
+            textview.setTextColor(Color.BLUE);
         }
         else
         {
-            webview.stopLoading();
+            textview.setTextColor(Color.GRAY);
             textview.setText(cursor.getString(1));
         }
     }
