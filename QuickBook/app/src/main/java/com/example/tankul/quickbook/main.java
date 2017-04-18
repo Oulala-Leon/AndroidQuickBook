@@ -8,23 +8,17 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-//import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
 import db.Database;
 import db.Database_Helper;
 
 
 public class main extends AppCompatActivity {
-    ArrayList<String> textsandURLs = new ArrayList<>();
-    String ToShow;
-
     Database_Helper mHelper;
     SQLiteDatabase db;
     Cursor cursor;
@@ -44,15 +38,16 @@ public class main extends AppCompatActivity {
             if (cursor.getCount()<1) {
                 setFirstPage(intent);
             }
-        cursor.moveToFirst();
-        updateUI();
+            else {
+                cursor.moveToFirst();
+                updateUI();
+            }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 startActivityForResult(intent, 1);
-
                 cursor.moveToLast();
                 updateUI();
             }
@@ -60,7 +55,7 @@ public class main extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
+        if (requestCode == 1 || requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
                 cursor.close();
                 db.close();
@@ -73,18 +68,38 @@ public class main extends AppCompatActivity {
                 cursor.moveToLast();
                 updateUI();
             }
+            else if (resultCode == Activity.RESULT_CANCELED && cursor.getCount() < 1)
+                finish();
             else
             {
                 cursor.moveToLast();
                 updateUI();
             }
+
         }
     }
 
     public void setFirstPage(Intent intent) {
-        Toast.makeText(this, "Please input your first text or URL.",
-                Toast.LENGTH_SHORT).show();
-        startActivity(intent);
+        Toast.makeText(this, "Please input your first text or URL.\n" +
+                        "Buttons on the right go to : end, 10 pages forward, one page forward.\n" +
+                        "Buttons on the left go to : start, 10 pages behind, one page behind.",
+                Toast.LENGTH_LONG).show();
+        startActivityForResult(intent, 2);
+    }
+
+    private void updateUI() {
+        TextView textview = (TextView) findViewById(R.id.PlainTextView);
+
+        if (cursor.getInt(2) == 1)
+        {
+            textview.setText(cursor.getString(1));
+            textview.setTextColor(Color.BLUE);
+        }
+        else
+        {
+            textview.setTextColor(Color.GRAY);
+            textview.setText(cursor.getString(1));
+        }
     }
 
     public void nextButton(View v) {
@@ -120,6 +135,16 @@ public class main extends AppCompatActivity {
         updateUI();
     }
 
+    public void toEndButton(View v){
+        cursor.moveToLast();
+        updateUI();
+    }
+
+    public void toStartButton(View v){
+        cursor.moveToFirst();
+        updateUI();
+    }
+
     public void tapURL(View view)
     {
         WebView webview = (WebView) findViewById(R.id.WebPageView);
@@ -129,18 +154,4 @@ public class main extends AppCompatActivity {
         }
     }
 
-    private void updateUI() {
-        TextView textview = (TextView) findViewById(R.id.PlainTextView);
-
-        if (cursor.getInt(2) == 1)
-        {
-            textview.setText(cursor.getString(1));
-            textview.setTextColor(Color.BLUE);
-        }
-        else
-        {
-            textview.setTextColor(Color.GRAY);
-            textview.setText(cursor.getString(1));
-        }
-    }
 }

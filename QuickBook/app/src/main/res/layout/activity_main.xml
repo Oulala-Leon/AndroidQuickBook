@@ -51,30 +51,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Button android:id="@+id/next"
-            android:text="@string/Next"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/tenNext"
-            android:layout_above="@id/tenNext"
-            android:onClick="nextButton"
-            />
-
-        <Button android:id="@+id/prev"
-            android:text="@string/Prev"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:onClick="prevButton"
-            android:layout_above="@+id/tenPrev"
-            android:layout_alignEnd="@+id/WebPageView" />
-
         <Button android:id="@+id/tenNext"
             android:text="@string/tenNext"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="320dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="300dp"
             android:onClick="nextTenButton"
             />
 
@@ -83,27 +65,45 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignEnd="@id/prev"
             android:onClick="prevTenButton"
+            android:layout_marginLeft="10dp"
             />
+
+        <Button android:id="@+id/next"
+            android:text="@string/Next"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/tenNext"
+            android:layout_below="@id/tenNext"
+            android:layout_marginTop="40dp"
+            android:onClick="nextButton" />
+
+        <Button android:id="@+id/prev"
+            android:text="@string/Prev"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="prevButton"
+            android:layout_below="@+id/tenPrev"
+            android:layout_marginTop="40dp"
+            android:layout_alignEnd="@+id/tenPrev" />
 
         <Button android:id="@+id/toEnd"
             android:text="@string/toEnd"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/tenNext"
-            android:layout_below="@id/tenNext"
-            android:layout_marginTop="20dp"
+            android:layout_above="@id/tenNext"
+            android:layout_marginBottom="40dp"
             android:onClick="toEndButton"
             />
 
         <Button android:id="@+id/toStart"
             android:text="@string/toStart"
-            android:layout_width="70dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/prev"
-            android:layout_below="@id/tenPrev"
-            android:layout_marginTop="20dp"
+            android:layout_alignStart="@id/tenPrev"
+            android:layout_above="@id/tenPrev"
+            android:layout_marginBottom="40dp"
             android:onClick="toStartButton"
             />
 

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="40dp"
-            android:hint="Input your text or URL here"
+            android:hint="@string/inputHint"
             android:id="@+id/TextInput"/>
         <Button
             android:layout_width="wrap_content"
@@ -24,7 +24,9 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@id/TextInput"
             android:id="@+id/URLButton"
+            android:onClick="clickURL"
             />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,6 +34,7 @@
             android:layout_alignTop="@id/URLButton"
             android:layout_toStartOf="@id/URLButton"
             android:id="@+id/TextButton"
+            android:onClick="clickText"
             />
 
     </RelativeLayout>
